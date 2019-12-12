@@ -1,7 +1,7 @@
 #! /bin/sh
 
 echo " Make requirements.txt"
-python -m pip freeze > requirements.txt
+python3 -m pip freeze > requirements.txt
 
 echo " Push to heroku"
 git add requirements.txt
