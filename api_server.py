@@ -1,15 +1,19 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import json
 import scraping
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 
-@app.route("/news/switch")
+DEFAULT_MINUTES = 30
+@app.route("/news/switch", methods=['GET'])
 def switch():
     minutes = request.args.get("minutes")
-    news = scraping.get_switch_news(minutes)
-    return json.dumps(news, ensure_ascii=False)
+    news = scraping.get_switch_news(
+        minutes if minutes is not None else DEFAULT_MINUTES
+    )
+    return jsonify(news)
 
 
 host_addr = "0.0.0.0"

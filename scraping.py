@@ -3,12 +3,12 @@ from bs4 import BeautifulSoup
 import datetime
 
 
-def get_switch_news(minutes):
+def get_switch_news(interval):
     html = urlopen("https://bbs.ruliweb.com/nin/board/300004")
     bs = BeautifulSoup(html.read(), 'html.parser')
 
     now = datetime.datetime.now()
-    threshold_date = now - datetime.timedelta(minutes=int(minutes))
+    threshold_date = now - datetime.timedelta(minutes=int(interval))
     list = bs.find_all("tr", {"class": "table_body"})
     result = []
     for news in list:
