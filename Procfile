@@ -1,1 +1,1 @@
-clock: python api_server.py
+web: gunicorn api_server:app
