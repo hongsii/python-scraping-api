@@ -25,6 +25,7 @@ def get_switch_news(interval):
         link = news.find("a", {"class": "deco"})
         result.append({
             "title": link.text,
-            "url": link.attrs["href"]
+            "url": link.attrs["href"],
+            "date": target_date.strftime("%Y-%m-%d %H:%M")
         })
     return result
