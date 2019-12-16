@@ -4,7 +4,10 @@ import datetime
 
 
 def get_switch_news(interval):
-    html = urlopen("https://bbs.ruliweb.com/nin/board/300004")
+    pc_base_url = "https://bbs.ruliweb.com"
+    mobile_base_url = "https://m.ruliweb.com"
+    html = urlopen(pc_base_url + "/nin/board/300004")
+    # https://m.ruliweb.com/nin/board/300004
     bs = BeautifulSoup(html.read(), 'html.parser')
 
     now = datetime.datetime.now()
@@ -25,7 +28,10 @@ def get_switch_news(interval):
         link = news.find("a", {"class": "deco"})
         result.append({
             "title": link.text,
-            "url": link.attrs["href"],
+            "url": {
+                "pc": link.attrs["href"],
+                "mobile": link.attrs["href"].replace(pc_base_url, mobile_base_url)
+            },
             "date": target_date.strftime("%Y-%m-%d %H:%M")
         })
     return result
