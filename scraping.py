@@ -7,7 +7,6 @@ def get_switch_news(interval):
     pc_base_url = "https://bbs.ruliweb.com"
     mobile_base_url = "https://m.ruliweb.com"
     html = urlopen(pc_base_url + "/nin/board/300004")
-    # https://m.ruliweb.com/nin/board/300004
     bs = BeautifulSoup(html.read(), 'html.parser')
 
     now = datetime.datetime.now()
