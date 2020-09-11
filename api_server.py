@@ -12,8 +12,12 @@ def switch():
     news = scraping.get_switch_news(minutes)
     return jsonify(news)
 
+@app.route("/ping", methods=['GET'])
+def ping():
+    return "pong"
+
 
 host_addr = "0.0.0.0"
 host_port = 8080
 if __name__ == "__main__":
-    app.run(host=host_addr, port=host_port)
+    app.run(host=host_addr, port=host_port, threaded=True)
