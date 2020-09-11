@@ -8,8 +8,10 @@ app.config['JSON_AS_ASCII'] = False
 
 @app.route("/news/switch", methods=['GET'])
 def switch():
+    print("start scraping")
     minutes = request.args.get("minutes", default=30)
     news = scraping.get_switch_news(minutes)
+    print("finished scraping")
     return jsonify(news)
 
 @app.route("/ping", methods=['GET'])
