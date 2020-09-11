@@ -8,11 +8,13 @@ def get_switch_news(interval):
     mobile_base_url = "https://m.ruliweb.com"
     html = urlopen(pc_base_url + "/nin/board/300004")
     bs = BeautifulSoup(html.read(), 'html.parser')
+    print("get contents")
 
     now = datetime.datetime.now()
     threshold_date = now - datetime.timedelta(minutes=int(interval))
     list = bs.find_all("tr", {"class": "table_body"})
     result = []
+    print("start parsing contents")
     for news in list:
         time = news.find("td", {"class": "time"}).text.strip()
         if ":" not in time:
@@ -25,6 +27,7 @@ def get_switch_news(interval):
             continue
 
         link = news.find("a", {"class": "deco"})
+        print(link)
         result.append({
             "title": link.text,
             "url": {
@@ -33,4 +36,5 @@ def get_switch_news(interval):
             },
             "date": target_date.strftime("%Y-%m-%d %H:%M")
         })
+    print("finished parsing contents")
     return result
